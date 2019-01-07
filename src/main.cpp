@@ -55,7 +55,7 @@ int main() {
       if (s != "") {
         auto j = json::parse(s);
         std::string event = j[0].get<std::string>();
-        
+
         if (event == "telemetry") {
           // j[1] is the data JSON object
           if (!pf.initialized()) {
@@ -94,11 +94,12 @@ int main() {
           std::istream_iterator<float>(),
           std::back_inserter(y_sense));
 
-          for (int i = 0; i < x_sense.size(); i++) {
-            LandmarkObs obs;
-            obs.x = x_sense[i];
-            obs.y = y_sense[i];
-            noisy_observations.push_back(obs);
+          for ( unsigned int i = 0; i < x_sense.size( ); i++ )
+          {
+              LandmarkObs obs;
+              obs.x = x_sense[i];
+              obs.y = y_sense[i];
+              noisy_observations.push_back( obs );
           }
 
           // Update the weights and resample
@@ -122,6 +123,9 @@ int main() {
 
           cout << "highest w " << highest_weight << endl;
           cout << "average w " << weight_sum/num_particles << endl;
+          cout << "best particle x " << best_particle.x << endl;
+          cout << "best particle y " << best_particle.y << endl;
+          cout << "best particle theta " << best_particle.theta << endl;
 
           json msgJson;
           msgJson["best_particle_x"] = best_particle.x;
@@ -172,93 +176,6 @@ int main() {
     std::cerr << "Failed to listen to port" << std::endl;
     return -1;
   }
-  
+
   h.run();
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
